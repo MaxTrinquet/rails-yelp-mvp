@@ -15,8 +15,11 @@ class RestaurantsController < ApplicationController
     # binding.pry
     @restaurant = Restaurant.create(restaurant_params)
     @restaurant.save
-
-    redirect_to restaurants_path
+    if @restaurant.save
+      redirect_to restaurant_path(@restaurant)
+    else
+      render :new
+    end
   end
 
   private
